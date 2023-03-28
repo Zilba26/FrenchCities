@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${city.nomCommune}"></title>
+  <link rel="stylesheet" th:href="@{/css/all.css}" />
+  <link rel="stylesheet" th:href="@{/css/all.min.css}" />
+  <link rel="stylesheet" th:href="@{/css/header.css}">
+  <link rel="stylesheet" th:href="@{/css/city.css}">
+</head>
+<body>
+<th:block th:insert="~{fragments/header}"></th:block>
+<script type="text/javascript" th:src="@{/js/city.js}"></script>
+</body>
+</html>

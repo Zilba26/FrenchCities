@@ -1,0 +1,54 @@
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+td {
+    cursor: pointer;
+}
+
+.pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+    padding-top: 20px;
+}
+
+.pages div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.pages div p, .pages div i {
+    cursor: pointer;
+    font-size: 18px;
+    color: #5151ff;
+}
+
+.pages div p:hover, .pages div i:hover {
+    text-decoration: underline;
+}
+
+.mid-pages-and-select {
+    flex-direction: column;
+}
+
+select {
+    font-size: 18px;
+}

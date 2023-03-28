@@ -10,6 +10,56 @@
 </head>
 <body>
 <th:block th:insert="~{fragments/header}"></th:block>
-
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Code INSEE</th>
+        <th>Nom</th>
+        <th>Code postal</th>
+        <th>Libelle acheminement</th>
+        <th>Ligne 5</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="city : ${cities.get(page)}" th:attr="onclick=|goToCity('${city.codeCommuneInsee}')|">
+        <td th:text="${city.codeCommuneInsee}"></td>
+        <td th:text="${city.nomCommune}"></td>
+        <td th:text="${city.codePostal}"></td>
+        <td th:text="${city.libelleAcheminement}"></td>
+        <td th:text="${city.ligne5}"></td>
+        <td th:text="${city.latitude}"></td>
+        <td th:text="${city.longitude}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <form method="post" action="/cities" class="pages">
+    <div class="1-to-3">
+      <p onclick="goToPage(0)">1</p>
+      <p onclick="goToPage(1)">2</p>
+      <p onclick="goToPage(2)">3</p>
+    </div>
+    <div class="mid-pages-and-select">
+      <div class="mid-pages">
+        <i class="fa-arrow-left-long fa-solid" th:attr="onclick=|goToPage('${page-1}')|"></i>
+        <p th:text="${page + 1}" th:attr="onclick=|goToPage('${page}')|"></p>
+        <i class="fa-arrow-right-long fa-solid" th:attr="onclick=|goToPage('${page+1}')|"></i>
+      </div>
+      <select>
+        <th:block th:each="i : ${#numbers.sequence(0, cities.size()-1)}">
+          <option th:text="${i+1}" th:value="${i}" th:if="${i == page}" selected="selected"></option>
+          <option th:text="${i+1}" th:value="${i}" th:unless="${i == page}"></option>
+        </th:block>
+      </select>
+    </div>
+    <div class="last-pages">
+      <p th:each="i : ${#numbers.sequence( cities.size() - 2, cities.size())}" th:text="${i}" th:attr="onclick=|goToPage('${i-1}')|"></p>
+    </div>
+    <input type="submit" hidden="true" name="page">
+  </form>
+</section>
 </body>
+<script type="text/javascript" th:src="@{/js/cities.js}"></script>
 </html>
