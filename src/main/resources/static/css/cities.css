@@ -50,3 +50,18 @@ select {
     font-size: 18px;
     border: none;
 }
+
+.sort-asc .sort-icon:after {
+    content: '\25b2';
+    margin-left: 5px;
+    position: relative;
+    top: -1px;
+}
+
+.sort-desc .sort-icon:after {
+    content: '\25bc';
+    margin-left: 5px;
+    position: relative;
+    top: -1px;
+}
+
