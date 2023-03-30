@@ -14,17 +14,17 @@
   <table>
     <thead>
       <tr>
-        <th>Code INSEE</th>
-        <th>Nom</th>
-        <th>Code postal</th>
-        <th>Libelle acheminement</th>
-        <th>Ligne 5</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
+        <th id="Code_commune_INSEE">Code INSEE</th>
+        <th id="Nom_commune">Nom</th>
+        <th id="Code_postal">Code postal</th>
+        <th id="Libelle_acheminement">Libelle acheminement</th>
+        <th id="Ligne_5">Ligne 5</th>
+        <th id="Latitude">Latitude</th>
+        <th id="Longitude">Longitude</th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="city : ${cities.get(page)}" th:attr="onclick=|goToCity('${city.codeCommuneInsee}')|">
+      <tr th:each="city : ${cities}" th:attr="onclick=|goToCity('${city.codeCommuneInsee}')|">
         <td th:text="${city.codeCommuneInsee}"></td>
         <td th:text="${city.nomCommune}"></td>
         <td th:text="${city.codePostal}"></td>
@@ -35,7 +35,8 @@
       </tr>
     </tbody>
   </table>
-  <form method="post" action="/cities" class="pages">
+  <form method="get" action="/cities" class="pages">
+    <input th:if="${order != null}" type="hidden" name="order" th:value="${order}">
     <div class="1-to-3">
       <p onclick="goToPage(0)">1</p>
       <p onclick="goToPage(1)">2</p>
@@ -44,20 +45,19 @@
     <div class="mid-pages-and-select">
       <div class="mid-pages">
         <i class="fa-arrow-left-long fa-solid" th:attr="onclick=|goToPage('${page-1}')|"></i>
-        <p th:text="${page + 1}" th:attr="onclick=|goToPage('${page}')|"></p>
+        <select>
+          <th:block th:each="i : ${#numbers.sequence(0, maxPage - 1)}">
+            <option th:text="${i+1}" th:value="${i}" th:if="${i == page}" selected="selected"></option>
+            <option th:text="${i+1}" th:value="${i}" th:unless="${i == page}"></option>
+          </th:block>
+        </select>
         <i class="fa-arrow-right-long fa-solid" th:attr="onclick=|goToPage('${page+1}')|"></i>
       </div>
-      <select>
-        <th:block th:each="i : ${#numbers.sequence(0, cities.size()-1)}">
-          <option th:text="${i+1}" th:value="${i}" th:if="${i == page}" selected="selected"></option>
-          <option th:text="${i+1}" th:value="${i}" th:unless="${i == page}"></option>
-        </th:block>
-      </select>
     </div>
     <div class="last-pages">
-      <p th:each="i : ${#numbers.sequence( cities.size() - 2, cities.size())}" th:text="${i}" th:attr="onclick=|goToPage('${i-1}')|"></p>
+      <p th:each="i : ${#numbers.sequence( maxPage - 2, maxPage)}" th:text="${i}" th:attr="onclick=|goToPage('${i-1}')|"></p>
     </div>
-    <input type="submit" hidden="true" name="page">
+    <input type="submit" hidden="hidden" name="page">
   </form>
 </section>
 </body>

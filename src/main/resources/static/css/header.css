@@ -3,8 +3,12 @@
     padding: 0;
 }
 
+:root {
+    --header-height: 50px;
+}
+
 header {
-    height: 50px;
+    height: var(--header-height);
     background-color: lightgray;
     display: flex;
     justify-content: center;

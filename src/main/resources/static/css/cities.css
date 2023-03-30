@@ -14,9 +14,6 @@ td, th {
     border: 1px solid black;
     padding: 5px;
     text-align: center;
-}
-
-td {
     cursor: pointer;
 }
 
@@ -37,7 +34,7 @@ td {
 
 .pages div p, .pages div i {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px;
     color: #5151ff;
 }
 
@@ -51,4 +48,5 @@ td {
 
 select {
     font-size: 18px;
+    border: none;
 }

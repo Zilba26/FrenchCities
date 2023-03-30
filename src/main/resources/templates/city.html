@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title th:text="${city.nomCommune}"></title>
-  <link rel="stylesheet" th:href="@{/css/all.css}" />
-  <link rel="stylesheet" th:href="@{/css/all.min.css}" />
-  <link rel="stylesheet" th:href="@{/css/header.css}">
-  <link rel="stylesheet" th:href="@{/css/city.css}">
+    <meta charset="UTF-8">
+    <title th:if="${city} != null" th:text="${city.nomCommune}"></title>
+    <title th:if="${city} == null">Ville non trouvée</title>
+    <link rel="stylesheet" th:href="@{/css/all.css}"/>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/city.css}">
 </head>
 <body>
 <th:block th:insert="~{fragments/header}"></th:block>
+<section th:if="${city} != null" class="form-wrapper">
+    <form method="POST" th:object="${city}" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="codeCommuneInsee" th:field="*{codeCommuneInsee}">
+        <div class="form-group">
+            <label for="codeCommuneInsee">Code Commune Insee</label>
+            <input class="input-number" type="number" id="codeCommuneInsee" th:field="*{codeCommuneInsee}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="nomCommune">Nom de la commune</label>
+            <input type="text" id="nomCommune" name="nomCommune" th:field="*{nomCommune}" required>
+        </div>
+        <div class="form-group">
+            <label for="codePostal">Code Postal</label>
+            <input class="input-number" type="number" id="codePostal" name="codePostal" th:field="*{codePostal}" pattern="[0-9]*" required>
+        </div>
+        <div class="form-group">
+            <label for="libelleAcheminement">Libellé d'acheminement</label>
+            <input type="text" id="libelleAcheminement" name="libelleAcheminement" th:field="*{libelleAcheminement}" required>
+        </div>
+        <div class="form-group">
+            <label for="ligne5">Ligne 5</label>
+            <input type="text" id="ligne5" name="ligne5" th:field="*{ligne5}">
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input class="input-number" type="number" id="latitude" name="latitude" th:field="*{latitude}" required>
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input class="input-number" type="number" inputmode="decimal" id="longitude" name="longitude" th:field="*{longitude}">
+        </div>
+        <button type="submit">Save Changes</button>
+    </form>
+</section>
+<section th:if="${error_message_get} != null" class="error_message">
+    <p th:text="${error_message_get}"></p>
+</section>
 <script type="text/javascript" th:src="@{/js/city.js}"></script>
 </body>
 </html>
