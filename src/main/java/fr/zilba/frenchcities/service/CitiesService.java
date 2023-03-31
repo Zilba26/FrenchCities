@@ -19,14 +19,6 @@ public class CitiesService {
 
     private static final String URL = "http://localhost:8181/ville";
 
-    public List<City> getAllCities() throws IOException {
-        return this.getAllCities(null, null);
-    }
-
-    public List<City> getAllCities(Integer page) throws IOException {
-        return this.getAllCities(page, null);
-    }
-
     public List<City> getAllCities(String order) throws IOException {
         return this.getAllCities(null, order);
     }
@@ -46,17 +38,7 @@ public class CitiesService {
                 url = new URL(URL + "?size=50&page=" + page);
             }
         }
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuilder content = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        con.disconnect();
-        JSONArray jsonArray = new JSONArray(content.toString());
+        JSONArray jsonArray = getArrayFromURL(url);
         List<City> cities = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject json = jsonArray.getJSONObject(i);
@@ -68,17 +50,7 @@ public class CitiesService {
 
     public City getCity(String codeCommune) throws IOException {
         URL url = new URL(URL + "?codeCommuneInsee=" + codeCommune);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuilder content = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        con.disconnect();
-        JSONArray jsonArray = new JSONArray(content.toString());
+        JSONArray jsonArray = getArrayFromURL(url);
         if (jsonArray.length() == 0) {
             return null;
         }
@@ -116,5 +88,19 @@ public class CitiesService {
             int count = Integer.parseInt(response);
             return (int) Math.ceil((double) count / 50);
         }
+    }
+
+    private JSONArray getArrayFromURL(URL url) throws IOException {
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder content = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+        in.close();
+        con.disconnect();
+        return new JSONArray(content.toString());
     }
 }

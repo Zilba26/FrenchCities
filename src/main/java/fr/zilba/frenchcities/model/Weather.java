@@ -6,7 +6,6 @@ import org.json.JSONObject;
 @Data
 public class Weather {
 
-    private Integer id;
 
     private String description;
 
@@ -16,7 +15,6 @@ public class Weather {
 
     public static Weather fromJson(JSONObject json) {
         Weather weather = new Weather();
-        weather.setId(json.getInt("id"));
         weather.setDescription(json.getString("description"));
         weather.setIcon(json.getString("icon"));
         return weather;
