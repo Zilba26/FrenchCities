@@ -23,13 +23,28 @@ public class CitiesService {
         return this.getAllCities(null, null);
     }
 
+    public List<City> getAllCities(Integer page) throws IOException {
+        return this.getAllCities(page, null);
+    }
+
+    public List<City> getAllCities(String order) throws IOException {
+        return this.getAllCities(null, order);
+    }
+
     public List<City> getAllCities(Integer page, String order) throws IOException {
-        if (page == null) page = 1;
         URL url;
-        if (order != null) {
-            url = new URL(URL + "?size=50&page=" + page + "&order=" + order);
+        if (page == null) {
+            if (order != null) {
+                url = new URL(URL + "?order=" + order);
+            } else {
+                url = new URL(URL);
+            }
         } else {
-            url = new URL(URL + "?size=50&page=" + page);
+            if (order != null) {
+                url = new URL(URL + "?size=50&page=" + page + "&order=" + order);
+            } else {
+                url = new URL(URL + "?size=50&page=" + page);
+            }
         }
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
@@ -52,7 +67,7 @@ public class CitiesService {
     }
 
     public City getCity(String codeCommune) throws IOException {
-        URL url = new URL(URL + "?codeCommune=" + codeCommune);
+        URL url = new URL(URL + "?codeCommuneInsee=" + codeCommune);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

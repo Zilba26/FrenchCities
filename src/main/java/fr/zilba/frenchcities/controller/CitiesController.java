@@ -17,9 +17,10 @@ public class CitiesController {
 
     @GetMapping("/cities")
     public String get(Model model, @RequestParam(name = "page", required = false) Integer page,
-                      @RequestParam(name = "order", required = false) String order ) throws IOException {
+                      @RequestParam(name = "order", required = false) String order ) throws IOException, InterruptedException {
+        if (page == null) page = 1;
         model.addAttribute("cities", citiesService.getAllCities(page, order));
-        model.addAttribute("page", page == null ? 0 : page - 1);
+        model.addAttribute("page", page - 1);
         model.addAttribute("maxPage", citiesService.getMaxPage());
         model.addAttribute("order", order);
         return "cities";

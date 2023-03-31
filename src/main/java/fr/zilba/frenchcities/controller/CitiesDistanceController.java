@@ -16,7 +16,7 @@ public class CitiesDistanceController {
 
     @GetMapping("/cities-distance")
     public String get(Model model) throws IOException {
-        model.addAttribute("cities", citiesService.getAllCities());
+        model.addAttribute("cities", citiesService.getAllCities("Nom_commune"));
         return "cities_distances";
     }
 }

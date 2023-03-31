@@ -1,12 +1,24 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--header-height));
+    gap: 100px;
+    position: relative;
+}
 
-
-.form-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
+section form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--header-height));
+    width: 40%;
 }
 
 .form-group {
     margin-bottom: 15px;
+    width: 100%;
 }
 
 label {
@@ -50,10 +62,50 @@ input[type=number] {
 }
 
 .error_message {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.weather {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    text-align: center;
+    position: absolute;
+    right: 15%;
+    transform: translateX(50%);
+    top: 80px;
+    min-width: 10%;
+}
+
+.weather img {
+    max-width: 100%;
+}
+
+.weather h2 {
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+.weather p {
+    font-size: 20px;
+}
+
+.update-message {
+    position: fixed;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: gray;
+    color: white;
+    transition: bottom 0.7s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - var(--header-height));
-    font-weight: bold;
-    font-size: 25px;
+}
+
+.update-message.visible {
+    bottom: 0;
 }

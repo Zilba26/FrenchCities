@@ -11,7 +11,7 @@
 </head>
 <body>
 <th:block th:insert="~{fragments/header}"></th:block>
-<section th:if="${city} != null" class="form-wrapper">
+<section th:if="${city} != null">
     <form method="POST" th:object="${city}" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="codeCommuneInsee" th:field="*{codeCommuneInsee}">
         <div class="form-group">
@@ -44,6 +44,12 @@
         </div>
         <button type="submit">Save Changes</button>
     </form>
+    <div class="weather">
+        <img th:src="${weather.getIconURL()}" alt="Météo" />
+        <h2 th:text="${weather.getWeather()}"></h2>
+        <p th:text="${weather.getTemperature()} + ' °C'"></p>
+    </div>
+    <div th:if="${update_message != null}" class="update-message" th:text="${update_message}"></div>
 </section>
 <section th:if="${error_message_get} != null" class="error_message">
     <p th:text="${error_message_get}"></p>
