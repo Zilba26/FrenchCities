@@ -42,7 +42,10 @@
             <label for="longitude">Longitude</label>
             <input class="input-number" type="number" inputmode="decimal" id="longitude" name="longitude" th:field="*{longitude}">
         </div>
-        <button type="submit">Save Changes</button>
+        <div class="buttons">
+            <button type="submit" name="delete">Supprimer la ville</button>
+            <button type="submit" name="save">Sauvegarder les modifications</button>
+        </div>
     </form>
     <div class="weather">
         <img th:src="${weather.getIconURL()}" alt="Météo" />

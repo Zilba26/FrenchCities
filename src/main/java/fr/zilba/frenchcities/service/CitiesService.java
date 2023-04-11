@@ -78,6 +78,17 @@ public class CitiesService {
         return String.valueOf(responseCode).startsWith("2");
     }
 
+    public boolean deleteCity(City city) throws IOException {
+        URL url = new URL(URL + "/delete/" + city.getCodeCommuneInsee());
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("PUT");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setDoOutput(true);
+        int responseCode = con.getResponseCode();
+        con.disconnect();
+        return String.valueOf(responseCode).startsWith("2");
+    }
+
     public Integer getMaxPage() throws IOException {
         URL url = new URL(URL + "/count");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
