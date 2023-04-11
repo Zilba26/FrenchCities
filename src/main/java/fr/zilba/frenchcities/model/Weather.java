@@ -27,4 +27,13 @@ public class Weather {
     public String getIconURL() {
         return "https://openweathermap.org/img/wn/" + this.icon + "@2x.png";
     }
+
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", temperature=" + temperature +
+                '}';
+    }
 }
