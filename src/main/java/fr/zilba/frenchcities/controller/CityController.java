@@ -36,6 +36,9 @@ public class CityController {
 
     @PostMapping(value = "/city", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String post(Model model, @ModelAttribute City city, @RequestParam(required = false, name = "save") String isUpdate, @RequestParam(required = false, name = "delete") String isDelete) throws IOException {
+        Weather weather = weatherService.getWeather(city);
+        model.addAttribute("city", city);
+        model.addAttribute("weather", weather);
         if (isUpdate != null) {
             boolean isGood = citiesService.updateCity(city);
             if (isGood) {
@@ -43,9 +46,6 @@ public class CityController {
             } else {
                 model.addAttribute("update_message", "Un problème est survenu lors de la mise à jour de la ville");
             }
-            model.addAttribute("city", city);
-            Weather weather = weatherService.getWeather(city);
-            model.addAttribute("weather", weather);
             return "city";
         } else if (isDelete != null) {
             boolean isGood = citiesService.deleteCity(city);
@@ -53,9 +53,6 @@ public class CityController {
                 return "redirect:/cities";
             } else {
                 model.addAttribute("delete_message", "Un problème est survenu lors de la suppression de la ville");
-                model.addAttribute("city", city);
-                Weather weather = weatherService.getWeather(city);
-                model.addAttribute("weather", weather);
                 return "city";
             }
         } else {
