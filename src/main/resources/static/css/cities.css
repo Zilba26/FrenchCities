@@ -65,3 +65,20 @@ select {
     top: -1px;
 }
 
+.delete-message {
+    position: fixed;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: gray;
+    color: white;
+    transition: bottom 0.7s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-message.visible {
+    bottom: 0;
+}

@@ -91,7 +91,7 @@ input[type=number] {
     font-size: 20px;
 }
 
-.update-message {
+.temp-message {
     position: fixed;
     bottom: -50px;
     left: 0;
@@ -105,7 +105,7 @@ input[type=number] {
     align-items: center;
 }
 
-.update-message.visible {
+.temp-message.visible {
     bottom: 0;
 }
 

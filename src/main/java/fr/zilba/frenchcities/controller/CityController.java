@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public class CityController {
     }
 
     @PostMapping(value = "/city", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String post(Model model, @ModelAttribute City city, @RequestParam(required = false, name = "save") String isUpdate, @RequestParam(required = false, name = "delete") String isDelete) throws IOException {
+    public String post(RedirectAttributes redirectAttributes, Model model, @ModelAttribute City city, @RequestParam(required = false, name = "save") String isUpdate, @RequestParam(required = false, name = "delete") String isDelete) throws IOException {
         Weather weather = weatherService.getWeather(city);
         model.addAttribute("city", city);
         model.addAttribute("weather", weather);
@@ -50,6 +51,7 @@ public class CityController {
         } else if (isDelete != null) {
             boolean isGood = citiesService.deleteCity(city);
             if (isGood) {
+                redirectAttributes.addFlashAttribute("delete_message", "Ville supprimée avec succès");
                 return "redirect:/cities";
             } else {
                 model.addAttribute("delete_message", "Un problème est survenu lors de la suppression de la ville");

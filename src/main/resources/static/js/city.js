@@ -1,11 +1,11 @@
-const update_message = document.querySelector(".update-message");
+const temp_message = document.getElementsByClassName("temp-message");
 
-if (update_message != null) {
+for (let i = 0; i < temp_message.length; i++) {
     setTimeout(() => {
-        update_message.classList.add("visible");
+        temp_message[i].classList.add("visible");
 
         setTimeout(() => {
-            update_message.classList.remove("visible");
+            temp_message[i].classList.remove("visible");
         }, 3000);
     }, 10);
 }

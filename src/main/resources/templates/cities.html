@@ -88,6 +88,7 @@
     </div>
     <input type="submit" hidden="hidden" name="page">
   </form>
+  <div th:if="${delete_message != null}" class="delete-message" th:text="${delete_message}"></div>
 </section>
 </body>
 <script type="text/javascript" th:src="@{/js/cities.js}"></script>

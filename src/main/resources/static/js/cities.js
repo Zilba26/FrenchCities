@@ -30,4 +30,17 @@ th.forEach((element) => {
             window.location.href = '/cities?order=' + id + '_A';
         }
     });
-})
+});
+
+
+const delete_message = document.querySelector(".delete-message");
+
+if (delete_message != null) {
+    setTimeout(() => {
+        delete_message.classList.add("visible");
+
+        setTimeout(() => {
+            delete_message.classList.remove("visible");
+        }, 3000);
+    }, 10);
+}
