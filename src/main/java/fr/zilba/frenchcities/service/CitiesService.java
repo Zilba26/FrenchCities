@@ -63,23 +63,7 @@ public class CitiesService {
     }
 
     public boolean updateCity(City city) throws IOException {
-        URL url = new URL(URL);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("PUT");
-        con.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
-        con.setDoOutput(true);
-
-        // Convertit l'objet City en JSON
-        String cityJson = new JSONObject(city).toString();
-
-        // Ajoute le JSON au corps de la requête
-        try (OutputStream outputStream = con.getOutputStream()) {
-            outputStream.write(cityJson.getBytes());
-        }
-
-        int responseCode = con.getResponseCode();
-        con.disconnect();
-        return String.valueOf(responseCode).startsWith("2");
+        return createOrUpdateCity(city, "PUT");
     }
 
     public boolean deleteCity(City city) throws IOException {
@@ -120,9 +104,13 @@ public class CitiesService {
     }
 
     public boolean createCity(City city) throws IOException {
+        return createOrUpdateCity(city, "POST");
+    }
+
+    public boolean createOrUpdateCity(City city, String method) throws IOException {
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("POST");
+        con.setRequestMethod(method);
         con.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
         con.setDoOutput(true);
 
