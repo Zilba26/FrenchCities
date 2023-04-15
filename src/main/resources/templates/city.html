@@ -36,15 +36,15 @@
         </div>
         <div class="form-group">
             <label for="latitude">Latitude</label>
-            <input class="input-number" type="number" id="latitude" name="latitude" th:field="*{latitude}" >
+            <input class="input-number" type="number" id="latitude" name="latitude" th:field="*{latitude}" step="any">
         </div>
         <div class="form-group">
             <label for="longitude">Longitude</label>
-            <input class="input-number" type="number" inputmode="decimal" id="longitude" name="longitude" th:field="*{longitude}">
+            <input class="input-number" type="number" inputmode="decimal" id="longitude" name="longitude" th:field="*{longitude}" step="any">
         </div>
         <div class="buttons">
-            <button type="submit" name="delete">Supprimer la ville</button>
             <button type="submit" name="save">Sauvegarder les modifications</button>
+            <button type="submit" name="delete">Supprimer la ville</button>
         </div>
     </form>
     <div class="weather" th:if="${weather} != null">

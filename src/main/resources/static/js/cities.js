@@ -3,7 +3,7 @@ function goToCity(code) {
 }
 
 function goToPage(page) {
-    const input = document.querySelector('input[type=submit]');
+    const input = document.getElementById("page_city");
     input.value = (parseInt(page) + 1).toString();
     input.click();
 }
@@ -16,8 +16,8 @@ select.addEventListener('change', (event) => {
 const th = document.querySelectorAll('th');
 
 th.forEach((element) => {
-    element.addEventListener('click', (event) => {
-        const id = event.target.id;
+    const id = element.id;
+    element.addEventListener('click', () => {
         const order = document.querySelector('input[name=order]');
         if (order!= null && id === order.value.substring(0, order.value.length - 2)) {
             const orderDirection = order.value.substring(order.value.length - 1);

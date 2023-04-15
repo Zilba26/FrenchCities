@@ -86,7 +86,7 @@
     <div class="last-pages">
       <p th:each="i : ${#numbers.sequence( maxPage - 2, maxPage)}" th:text="${i}" th:attr="onclick=|goToPage('${i-1}')|"></p>
     </div>
-    <input type="submit" hidden="hidden" name="page">
+    <input type="submit" hidden="hidden" name="page" id="page_city">
   </form>
   <div th:if="${delete_message != null}" class="delete-message" th:text="${delete_message}"></div>
 </section>
