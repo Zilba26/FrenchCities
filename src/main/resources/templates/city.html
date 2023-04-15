@@ -47,13 +47,12 @@
             <button type="submit" name="save">Sauvegarder les modifications</button>
         </div>
     </form>
-    <div class="weather">
+    <div class="weather" th:if="${weather} != null">
         <img th:src="${weather.getIconURL()}" alt="Météo" />
         <h2 th:text="${weather.getWeather()}"></h2>
         <p th:text="${weather.getTemperature()} + ' °C'"></p>
     </div>
-    <div th:if="${update_message != null}" class="temp-message" th:text="${update_message}"></div>
-    <div th:if="${delete_message != null}" class="temp-message" th:text="${delete_message}"></div>
+    <div th:if="${temp_message != null}" class="temp-message" th:text="${temp_message}"></div>
 </section>
 <section th:if="${error_message_get} != null" class="error_message">
     <p th:text="${error_message_get}"></p>

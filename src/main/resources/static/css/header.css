@@ -15,6 +15,14 @@ header {
     align-items: center;
 }
 
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
 nav ul {
     list-style: none;
     display: flex;
@@ -38,4 +46,52 @@ nav ul li a {
 nav ul li a:hover {
     color: white;
     background-color: gray;
+}
+
+.relative {
+    position: relative;
+}
+
+#list-container {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: none;
+    right: 0;
+    z-index: 100;
+}
+
+#list-container div {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header_button {
+    background-color: #5151ff;
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    width: min-content;
+    cursor: pointer;
+}
+
+.header_button p {
+    white-space: nowrap;
+}
+
+#toggle-button {
+    cursor: pointer;
+}
+
+#create_city_form {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+#city_code {
+    padding: 5px;
 }

@@ -19,6 +19,9 @@ public class WeatherService {
     private static final String API_KEY = "542895e1fae55e549f162f941863cbc4";
 
     public Weather getWeather(String longitude, String latitude) throws IOException {
+        if (longitude == null || latitude == null || longitude.isEmpty() || latitude.isEmpty()) {
+            return null;
+        }
         URL url = new URL(URL + "&lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_KEY);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");

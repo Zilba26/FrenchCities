@@ -30,6 +30,10 @@ public class City {
         this.longitude = longitude;
     }
 
+    public static City fromCodeCommune(String codeCommune) {
+        return new City(codeCommune, "", "", "", "", "", "");
+    }
+
     public static City fromJson(JSONObject json) {
         String codeCommuneInsee = json.getString("codeCommuneInsee");
         String nomCommune = json.getString("nomCommune");

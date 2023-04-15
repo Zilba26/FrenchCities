@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class CitiesService {
 
-    private static final String URL = "http://localhost:8181/ville";
+    private static final String URL = "http://localhost:8181/city";
 
     public List<City> getAllCities(String order) throws IOException {
         return this.getAllCities(null, order);
@@ -113,5 +113,42 @@ public class CitiesService {
         in.close();
         con.disconnect();
         return new JSONArray(content.toString());
+    }
+
+    public boolean createCity(City city) throws IOException {
+        URL url = new URL(URL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setDoOutput(true);
+
+        // Convertit l'objet City en JSON
+        String cityJson = new JSONObject(city).toString();
+
+        // Ajoute le JSON au corps de la requête
+        try (OutputStream outputStream = con.getOutputStream()) {
+            outputStream.write(cityJson.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int responseCode = con.getResponseCode();
+        con.disconnect();
+        return String.valueOf(responseCode).startsWith("2");
+    }
+
+    public boolean createCity(String codeCommune) throws IOException {
+        City city = City.fromCodeCommune(codeCommune);
+        return this.createCity(city);
+    }
+
+    public boolean uninhibitedCities() throws IOException {
+        URL url = new URL(URL + "/uninhibited");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("PUT");
+
+        int responseCode = con.getResponseCode();
+        con.disconnect();
+        return String.valueOf(responseCode).startsWith("2");
     }
 }

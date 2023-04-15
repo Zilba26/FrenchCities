@@ -43,9 +43,9 @@ public class CityController {
         if (isUpdate != null) {
             boolean isGood = citiesService.updateCity(city);
             if (isGood) {
-                model.addAttribute("update_message", "Mise à jour de la ville effectué");
+                model.addAttribute("temp_message", "Mise à jour de la ville effectué");
             } else {
-                model.addAttribute("update_message", "Un problème est survenu lors de la mise à jour de la ville");
+                model.addAttribute("temp_message", "Un problème est survenu lors de la mise à jour de la ville");
             }
             return "city";
         } else if (isDelete != null) {
@@ -54,7 +54,7 @@ public class CityController {
                 redirectAttributes.addFlashAttribute("delete_message", "Ville supprimée avec succès");
                 return "redirect:/cities";
             } else {
-                model.addAttribute("delete_message", "Un problème est survenu lors de la suppression de la ville");
+                model.addAttribute("temp_message", "Un problème est survenu lors de la suppression de la ville");
                 return "city";
             }
         } else {
