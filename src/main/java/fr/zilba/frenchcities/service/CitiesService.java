@@ -18,6 +18,10 @@ import java.util.List;
 public class CitiesService {
 
     private static final String URL = "http://localhost:8181/city";
+    private static final String CONTENT_TYPE = "Content-Type";
+
+    private static final String APPLICATION_JSON = "application/json";
+
 
     public List<City> getAllCities(String order) throws IOException {
         return this.getAllCities(null, order);
@@ -62,7 +66,7 @@ public class CitiesService {
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("PUT");
-        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
         con.setDoOutput(true);
 
         // Convertit l'objet City en JSON
@@ -82,7 +86,7 @@ public class CitiesService {
         URL url = new URL(URL + "/delete/" + city.getCodeCommuneInsee());
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("PUT");
-        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
         con.setDoOutput(true);
         int responseCode = con.getResponseCode();
         con.disconnect();
@@ -119,7 +123,7 @@ public class CitiesService {
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON);
         con.setDoOutput(true);
 
         // Convertit l'objet City en JSON
@@ -128,8 +132,6 @@ public class CitiesService {
         // Ajoute le JSON au corps de la requête
         try (OutputStream outputStream = con.getOutputStream()) {
             outputStream.write(cityJson.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         int responseCode = con.getResponseCode();

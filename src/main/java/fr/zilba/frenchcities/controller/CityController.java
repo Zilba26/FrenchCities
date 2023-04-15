@@ -22,6 +22,8 @@ public class CityController {
     @Autowired
     WeatherService weatherService;
 
+    private static final String TEMP_MESSAGE_ATTR = "temp_message";
+
     @GetMapping("/city")
     public String get(Model model, @RequestParam(value = "code") String codeCommune) throws IOException {
         City city = citiesService.getCity(codeCommune);
@@ -43,9 +45,9 @@ public class CityController {
         if (isUpdate != null) {
             boolean isGood = citiesService.updateCity(city);
             if (isGood) {
-                model.addAttribute("temp_message", "Mise à jour de la ville effectué");
+                model.addAttribute(TEMP_MESSAGE_ATTR, "Mise à jour de la ville effectué");
             } else {
-                model.addAttribute("temp_message", "Un problème est survenu lors de la mise à jour de la ville");
+                model.addAttribute(TEMP_MESSAGE_ATTR, "Un problème est survenu lors de la mise à jour de la ville");
             }
             return "city";
         } else if (isDelete != null) {
@@ -54,7 +56,7 @@ public class CityController {
                 redirectAttributes.addFlashAttribute("delete_message", "Ville supprimée avec succès");
                 return "redirect:/cities";
             } else {
-                model.addAttribute("temp_message", "Un problème est survenu lors de la suppression de la ville");
+                model.addAttribute(TEMP_MESSAGE_ATTR, "Un problème est survenu lors de la suppression de la ville");
                 return "city";
             }
         } else {
